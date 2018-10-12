@@ -2,13 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import axios from ('axios');
-import express from ('express');
-import bodyParser from ('body-parser');
-import massive from ('massive');
-// import * as serviceWorker from './serviceWorker';
-const app = express ();
-app.use(boydPArser.json());
+// // import * as serviceWorker from './serviceWorker';
+
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
