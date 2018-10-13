@@ -1,4 +1,61 @@
-.App {
+body {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  /* justify-content: center; */
+  background-color: green;
+  font-family: 'Open Sans', sans-serif;
+}
+/* .app {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+} */
+
+.header-box {
+
+
+  height: 100px;
+
+
+  /* align-content: center; */
+  justify-content: center;
+  background-color: red;
+}
+.below_header {
+  /* height: 100vh; */
+  max-width: 1000px;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-evenly;
+  /* justify-items: flex-start; */
+  align-items: flex-start;
+
+  background: yellow;
+  flex-wrap: wrap;
+}
+
+.dash-box {
+  height: 800px;
+  width: 300px;
+  background-color: blue;
+  margin: 25px;
+  padding: 25px;
+}
+.form-box {
+  height: 300px;
+  width: 300px;
+  background-color: teal;
+  margin: 25px;
+  padding: 25px;
+
+  justify-content: center;
+}
+
+
+/* .App {
   text-align: center;
 }
 
@@ -29,4 +86,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

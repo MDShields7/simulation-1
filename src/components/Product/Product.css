@@ -1,0 +1,19 @@
+.product_box {
+    background: white;
+    height: 250px;
+    width: 250px;
+    margin: 10px;
+    display: flex;
+    /* align-content: space-around; */
+    justify-content: space-around;
+}
+.name {
+    font-size: 18px;
+    font-display: bold;
+}
+.price {
+    font-size: 14px;
+}
+img {
+    height: 100px;
+}

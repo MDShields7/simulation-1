@@ -18,3 +18,15 @@ input {
 .label {
 
 }
+.form-btns {
+    width:160px;
+    margin: 10px;
+    /* background-color:purple; */
+    display: flex;
+    justify-content: space-between;
+}
+
+  
+  .form-text {
+    justify-content: left;
+  }
