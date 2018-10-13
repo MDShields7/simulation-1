@@ -5,13 +5,14 @@ import './Dashboard.css'
 export default class Dashboard extends Component {
   render() {
       const {inventory}=this.props;
-      console.log(inventory);
+    //   console.log(inventory);
     return (
       <div>
-            <h1>Dashboard</h1>
-            <div className='product_view'>{
+            {/* <h1>Dashboard</h1> */}
+            <div className='product-view'>{
                 inventory.map( elem => (
                 <Product
+                key={elem.key}
                 name={elem.name}
                 price={elem.price}
                 image_url={elem.image_url}

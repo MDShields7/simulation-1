@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Dashboard from './components/Dashboard/Dashboard';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
@@ -14,30 +15,31 @@ class App extends Component {
       cart: [],
       newItem: {},
     }
+    this.postMethod = this.postMethod.bind(this);
   }
-  getServer(){
-    axios.get('/api/inventory')
+  componentDidMount(){
+    axios.get('/api/inventory').then(response => {
+      this.setState ({inventory: response.data})
+    })
+    // console.log('componentDidMount',this.state.inventory)
+  }
+  postMethod(name, price, image_url){
+    console.log('posted')
+    axios.post('/api/inventory', {name, price, image_url}).then(response => { console.log(response)});
+    this.componentDidMount();
   }
 
-  addToCart (e){
-    const {name, price, image_url} = e.target.value;
-    // let newItem = {
-    //   image_url: '',
-    //   name: '',
-    //   price: 0,
-    // };
-    let newCart = this.state.cart
-  }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.inventory);
     return (
 
       <body>
+        <div>
           <div className='header-box'>
             <Header/>
           </div>
-          <div className className='below_header'>
+          <div className='below_header'>
             <div className='dash-box'>
               <Dashboard
 
@@ -45,10 +47,12 @@ class App extends Component {
             </div>
             <div className='form-box'>
               <Form
+              postMethod={this.postMethod}
               // newItem={newItem}
               />
             </div>
           </div>
+        </div>
       </body>
     );
   }

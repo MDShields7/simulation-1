@@ -12,8 +12,9 @@ massive(process.env.CONNECTION_STRING).then( dbInstance => {
   }).catch( err => console.log(err) );
 
 app.get('/api/inventory', controller.read);
+app.post('/api/inventory', controller.post);
 
-const port = process.env.PORT || 3500;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log(`Leeeeroy Jenkins! ${port}`);
 })
