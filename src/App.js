@@ -10,28 +10,15 @@ class App extends Component {
   constructor (){
     super()
     this.state = {
-      inventory: [
-        {
-          name: 'laptop',
-          price: 2600,
-          image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5465/5465502_sd.jpg;maxHeight=640;maxWidth=550',
-        },
-        {
-          name: 'iPhone',
-          price: 800,
-          image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5999/5999105_sd.jpg;maxHeight=640;maxWidth=550',
-        },
-        {
-          name: 'tablet',
-          price: 1000,
-          image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5505/5505500_sd.jpg;maxHeight=640;maxWidth=550',
-        }
-      ],
+      inventory: [],
       cart: [],
       newItem: {},
     }
-    
   }
+  getServer(){
+    axios.get('/api/inventory')
+  }
+
   addToCart (e){
     const {name, price, image_url} = e.target.value;
     // let newItem = {
@@ -68,3 +55,19 @@ class App extends Component {
 }
 
 export default App;
+
+// {
+//   name: 'laptop',
+//   price: 2600,
+//   image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5465/5465502_sd.jpg;maxHeight=640;maxWidth=550',
+// },
+// {
+//   name: 'iPhone',
+//   price: 800,
+//   image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5999/5999105_sd.jpg;maxHeight=640;maxWidth=550',
+// },
+// {
+//   name: 'tablet',
+//   price: 1000,
+//   image_url: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5505/5505500_sd.jpg;maxHeight=640;maxWidth=550',
+// }
