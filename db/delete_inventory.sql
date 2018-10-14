@@ -1,1 +1,1 @@
-DELETE FROM inventory WHERE id = %1;
+DELETE FROM inventory WHERE id = $1;

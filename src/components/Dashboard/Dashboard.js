@@ -6,6 +6,7 @@ export default class Dashboard extends Component {
   render() {
       const {inventory}=this.props;
     //   console.log(inventory);
+    console.log('props.inventory',this.props.inventory)
     return (
       <div>
             {/* <h1>Dashboard</h1> */}
@@ -13,11 +14,17 @@ export default class Dashboard extends Component {
                 inventory.map( elem => (
                 <Product
                 key={elem.key}
+                id={elem.id}
                 name={elem.name}
                 price={elem.price}
                 image_url={elem.image_url}
-                />))
-            }</div> 
+
+                getOneMethod={this.props.getOneMethod}
+                deleteMethod={this.props.deleteMethod}
+                />
+                ))
+            }
+            </div> 
       </div>
     )
   }

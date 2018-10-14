@@ -12,23 +12,50 @@ class App extends Component {
     super()
     this.state = {
       inventory: [],
-      cart: [],
-      newItem: {},
+      editItem: {},
+      editing: false,
     }
+    this.editStatus = this.editStatus.bind(this);
     this.postMethod = this.postMethod.bind(this);
+    this.updateMethod = this.updateMethod.bind(this);
+    this.deleteMethod = this.deleteMethod.bind(this);
   }
   componentDidMount(){
     axios.get('/api/inventory').then(response => {
       this.setState ({inventory: response.data})
     })
     // console.log('componentDidMount',this.state.inventory)
-  }
+  };
+  getOneMethod(id){
+    axios.get('/api/inventory'+`/${id}`).then(response => {
+      console.log('app.js, getOneMethod, response', response.data)
+      this.setState ({editItem: response.data})
+    })
+    this.editStatus()
+  };
   postMethod(name, price, image_url){
-    console.log('posted')
+    console.log('postMethod')
     axios.post('/api/inventory', {name, price, image_url}).then(response => { console.log(response)});
-    this.componentDidMount();
-  }
+    // this.componentDidMount();
+  };
+  deleteMethod(id){
+    console.log('deleteMethod', 'id', id, );
+    // axios.delete('/api/inventory' +`/${id}`)
+    axios.delete(`/api/inventory/${id}`)
+    // this.componentDidMount();
+  };
+  updateMethod(id, name, price, image_url){
+    console.log('updateMethod');
+    axios.put('/api/inventory' +`/${id}`, {name, price, image_url});
+  };
+  // editItem(id){
 
+  // };
+  editStatus(){
+    this.setState({
+      editing: true,
+    })
+  };
 
   render() {
     console.log(this.state.inventory);
@@ -42,11 +69,18 @@ class App extends Component {
           <div className='below_header'>
             <div className='dash-box'>
               <Dashboard
+              getOneMethod={this.getOneMethod}
+              deleteMethod={this.deleteMethod}
+              editStatus={this.editStatus}
+              inventory={this.state.inventory}
 
-              inventory={this.state.inventory}/>
+              />
             </div>
             <div className='form-box'>
               <Form
+              updateMethod={this.updateMethod}
+              editing={this.state.editing}
+              editItem={this.editItem}
               postMethod={this.postMethod}
               // newItem={newItem}
               />
