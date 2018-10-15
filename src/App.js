@@ -15,21 +15,25 @@ class App extends Component {
       editItem: {},
       editing: false,
     }
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.editStatus = this.editStatus.bind(this);
     this.postMethod = this.postMethod.bind(this);
+    this.getOneMethod = this.getOneMethod.bind(this);
     this.updateMethod = this.updateMethod.bind(this);
     this.deleteMethod = this.deleteMethod.bind(this);
   }
   componentDidMount(){
     axios.get('/api/inventory').then(response => {
+      // console.log('app.js, componentDidMount, response.data', response.data, 'typeof response.data', typeof response.data)
       this.setState ({inventory: response.data})
     })
-    // console.log('componentDidMount',this.state.inventory)
   };
   getOneMethod(id){
-    axios.get('/api/inventory'+`/${id}`).then(response => {
+    // console.log('app.js, getOneMethod, this.state', this.state)
+    axios.get('/api/inventory'+`/${id}`).then(response => {      
       console.log('app.js, getOneMethod, response', response.data)
-      this.setState ({editItem: response.data})
+      console.log('app.js, getOneMethod, id', id)
+      this.setState ({editItem: response.data[0]})
     })
     this.editStatus()
   };
@@ -58,35 +62,34 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.inventory);
+    console.log('app.js, render, this.state', this.state);
     return (
 
       <body>
-        <div>
+
           <div className='header-box'>
             <Header/>
+            <button onClick={this.componentDidMount}>state</button>
           </div>
           <div className='below_header'>
             <div className='dash-box'>
               <Dashboard
               getOneMethod={this.getOneMethod}
               deleteMethod={this.deleteMethod}
-              editStatus={this.editStatus}
               inventory={this.state.inventory}
-
               />
             </div>
             <div className='form-box'>
               <Form
               updateMethod={this.updateMethod}
               editing={this.state.editing}
-              editItem={this.editItem}
+              editItem={this.state.editItem}
               postMethod={this.postMethod}
               // newItem={newItem}
               />
             </div>
           </div>
-        </div>
+
       </body>
     );
   }

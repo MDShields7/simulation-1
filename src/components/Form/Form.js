@@ -9,11 +9,19 @@ export default class Form extends Component {
             name: '',
             price: 0,
         }
+    this.componentDidUpdate= this.componentDidUpdate.bind(this);
     this.handleChange_Img = this.handleChange_Img.bind(this);
     this.handleChange_Nam = this.handleChange_Nam.bind(this);
     this.handleChange_Prc = this.handleChange_Prc.bind(this);
     this.cancel = this.cancel.bind(this);
     this.post = this.post.bind(this);
+    this.getOneState = this.getOneState.bind(this);
+    }
+    componentDidUpdate(newProps){
+        if (newProps.editItem.name !== this.props.editItem.name){
+            this.getOneState();
+            console.log('form.js, componentDidMount', this.state.name )
+        }
     }
     handleChange_Img (e){
         this.setState({
@@ -41,6 +49,15 @@ export default class Form extends Component {
         this.props.updateMethod(this.state.id, this.state.name, this.state.price, this.state.image_url);
         this.cancel();        
     }
+    getOneState (){
+        if (this.props.editing) {
+            this.setState({
+                name: this.props.editItem.name,
+                price: this.props.editItem.price,
+                image_url: this.props.editItem.image_url,
+            })
+        }
+    }
     cancel () {
         this.setState({
             image_url: '',
@@ -49,10 +66,16 @@ export default class Form extends Component {
         })
     }
   render() {
-      const {image_url, name, price} = this.state;
-        const{updateMethod, postItem, editing, editItem} = this.props
-        // console.log('form.js',image_url, price, name)
+        const {image_url, name, price} = this.state;
+        const{updateMethod, postItem, editing} = this.props
+        const{editItem} = this.props;
+    
 
+        console.log('form.js, this.state', this.state)
+        console.log('Form.js, editItem',editItem)
+        console.log('Form.js, editing',editing)
+        // console.log('Form.js, editing',editing)
+        // console.log('Form.js, editing.name',editItem.name)
       return (
       <div className='box'>
         {
@@ -66,7 +89,7 @@ export default class Form extends Component {
                 <div className='form-text'>editing Price:</div>
                 <input type="text"value={price} onChange={this.handleChange_Prc}/>
                 <section className='form-btns'>
-                    <button onClick={ () => this.update(this.props.id)}>editing Add</button>
+                    <button onClick={ () => this.update(this.props.id, this.state.name, this.state.price, this.state.image_url)}>editing Add</button>
                     <button onClick={this.cancel}>editing Cancel</button>
                 </section>
             </div>
